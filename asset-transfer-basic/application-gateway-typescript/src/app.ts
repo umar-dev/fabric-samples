@@ -202,6 +202,16 @@ async function readAssetByID(contract: Contract): Promise<void> {
     console.log('*** Result:', result);
 }
 
+async function deleteAssetByID(contract: Contract): Promise<void> {
+    console.log('\n--> Evaluate Transaction: ReadAsset, function returns asset attributes');
+
+    const resultBytes = await contract.evaluateTransaction('DeleteAsset', 'LA0001');
+
+    const resultJson = utf8Decoder.decode(resultBytes);
+    const result = JSON.parse(resultJson);
+    console.log('*** Result:', result);
+}
+
 /**
  * submitTransaction() will throw an error containing details of any error responses from the smart contract.
  */
