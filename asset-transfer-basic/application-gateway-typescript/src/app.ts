@@ -11,7 +11,7 @@ import { promises as fs } from 'fs';
 import * as path from 'path';
 import { TextDecoder } from 'util';
 
-const channelName = envOrDefault('CHANNEL_NAME', 'mychannel');
+const channelName = envOrDefault('CHANNEL_NAME', 'land-record');
 const chaincodeName = envOrDefault('CHAINCODE_NAME', 'basic');
 const mspId = envOrDefault('MSP_ID', 'Org1MSP');
 
@@ -85,7 +85,8 @@ async function main(): Promise<void> {
         await readAssetByID(contract);
 
         // Update an asset which does not exist.
-        await updateNonExistentAsset(contract)
+        //await updateNonExistentAsset(contract)
+	await displayInputParameters();
     } finally {
         gateway.close();
         client.close();
@@ -151,11 +152,18 @@ async function createAsset(contract: Contract): Promise<void> {
 
     await contract.submitTransaction(
         'CreateAsset',
-        assetId,
-        'yellow',
-        '5',
-        'Tom',
-        '1300',
+	 'LA0011',
+         'Irfan',
+	 'CH0850805',
+	 'saddar',
+	 'rawalpidni', 
+	 'rawalpindi', 
+	 'punjab', 
+	 '460000', 
+	 '45',
+	 '450000000', 
+	 'sultan', 
+	 'ali',
     );
 
     console.log('*** Transaction committed successfully');
@@ -169,7 +177,7 @@ async function transferAssetAsync(contract: Contract): Promise<void> {
     console.log('\n--> Async Submit Transaction: TransferAsset, updates existing asset owner');
 
     const commit = await contract.submitAsync('TransferAsset', {
-        arguments: [assetId, 'Saptha'],
+        arguments: ['LA0004', 'Sulaman'],
     });
     const oldOwner = utf8Decoder.decode(commit.getResult());
 
@@ -187,7 +195,7 @@ async function transferAssetAsync(contract: Contract): Promise<void> {
 async function readAssetByID(contract: Contract): Promise<void> {
     console.log('\n--> Evaluate Transaction: ReadAsset, function returns asset attributes');
 
-    const resultBytes = await contract.evaluateTransaction('ReadAsset', assetId);
+    const resultBytes = await contract.evaluateTransaction('ReadAsset', 'LA0009');
 
     const resultJson = utf8Decoder.decode(resultBytes);
     const result = JSON.parse(resultJson);
@@ -198,16 +206,23 @@ async function readAssetByID(contract: Contract): Promise<void> {
  * submitTransaction() will throw an error containing details of any error responses from the smart contract.
  */
 async function updateNonExistentAsset(contract: Contract): Promise<void>{
-    console.log('\n--> Submit Transaction: UpdateAsset asset70, asset70 does not exist and should return an error');
+    console.log('\n--> Submit Transaction: UpdateAsset LA00010, LA0010 does not exist and should return an error');
 
     try {
         await contract.submitTransaction(
             'UpdateAsset',
-            'asset70',
-            'blue',
-            '5',
-            'Tomoko',
-            '300',
+            'LA0010',
+            'Tariq',
+            'CH0850805',
+            'saddar',
+            'rawalpidni',
+            'rawalpindi',
+            'punjab',
+            '460000',
+            '45',
+            '450000000',
+            'sultan',
+            'ali',
         );
         console.log('******** FAILED to return an error');
     } catch (error) {

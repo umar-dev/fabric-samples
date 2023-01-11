@@ -26,7 +26,7 @@ class AssetTransfer extends Contract {
             ZipCode: '46000',
             AreaOfLand: 45,
             CostOfLand: 45000000,
-            PreviousOwner: 'ali',
+            PreviousOwner: 'ali'
             NextOfKin: 'zain',
           },
          {
@@ -40,7 +40,7 @@ class AssetTransfer extends Contract {
             ZipCode: '46000',
             AreaOfLand: 25,
             CostOfLand: 85000000,
-            PreviousOwner: 'hamid',
+            PreviousOwner: 'hamid'
             NextOfKin: 'zain',
           },
          {
@@ -54,7 +54,7 @@ class AssetTransfer extends Contract {
             ZipCode: '46000',
             AreaOfLand: 15,
             CostOfLand: 65000000,
-            PreviousOwner: 'hamid',
+            PreviousOwner: 'hamid'
             NextOfKin: 'zain',
           },
           {
@@ -68,7 +68,7 @@ class AssetTransfer extends Contract {
             ZipCode: '46000',
             AreaOfLand: 25,
             CostOfLand: 85000000,
-            PreviousOwner: 'kamran',
+            PreviousOwner: 'kamran'
             NextOfKin: 'ali',
           },
         ];
@@ -84,7 +84,7 @@ class AssetTransfer extends Contract {
     }
 
     // CreateAsset issues a new asset to the world state with given details.
-    async CreateAsset(ctx, id, ownerName, registryNumber, area, city, district, province, zipCode, areaOfLand, costOfLand, previousOwner, nextOfKin) {
+    async CreateAsset(ctx, id, OwnerName, registryNumber, area, city, district, province, zipCode, areaOfLand, costOfLand, previousOwner, nextOfKin) {
         const exists = await this.AssetExists(ctx, id);
         if (exists) {
             throw new Error(`The asset ${id} already exists`);
@@ -119,7 +119,7 @@ class AssetTransfer extends Contract {
     }
 
     // UpdateAsset updates an existing asset in the world state with provided parameters.
-    async UpdateAsset(ctx, id, ownerName, registryNumber, area, city, district, province, zipCode, areaOfLand, costOfLand, previousOwner, nextOfKin) {
+    async UpdateAsset(ctx, id, OwnerName, registryNumber, area, city, district, province, zipCode, areaOfLand, costOfLand, previousOwner, nextOfKin) {
         const exists = await this.AssetExists(ctx, id);
         if (!exists) {
             throw new Error(`The asset ${id} does not exist`);
